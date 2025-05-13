@@ -78,6 +78,37 @@ tensorboard_cb = tf.keras.callbacks.TensorBoard(log_dir=log_dir)
 
 ---
 
+## 🧱 Richtige Reihenfolge von Layern in einem CNN
+
+Eine bewährte Reihenfolge für CNN-Modelle ist:
+
+```
+Input (z. B. 32x32x3 Bild)
+    ↓
+Conv2D (z. B. 32 Filter, 3x3)
+    ↓
+Activation (z. B. ReLU)
+    ↓
+MaxPooling2D (z. B. 2x2)
+    ↓
+[Mehr Conv + Pooling-Schichten]
+    ↓
+Flatten()
+    ↓
+Dense (z. B. 64 Neuronen)
+    ↓
+Dropout (optional)
+    ↓
+Dense (Output, z. B. 10 Klassen mit Softmax)
+```
+
+📌 Wichtig:
+- `Conv2D` und `MaxPooling2D` kommen **vor** `Flatten()`
+- `Flatten()` bereitet die Daten für `Dense` vor
+- Dropout vor dem finalen Klassifikator hilft gegen Overfitting
+
+---
+
 ## 🎯 Was ich jetzt besser kann
 
 - CNNs bauen und verstehen (Conv → Pool → Flatten → Dense)
